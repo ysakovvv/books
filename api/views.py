@@ -12,8 +12,10 @@ class BookCreate(generics.CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+
 def books_page(request):
-    # URL локального API
-    response = requests.get("http://127.0.0.1:8000/api/books/")
-    books = response.json()
-    return render(request, "books_page.html", {"books": books})
+    # Бардык китептерди DBдан алабыз
+    books = Book.objects.all()
+
+    # Templateке жөнөтөбүз
+    return render(request, 'books_page.html', {'books': books})
